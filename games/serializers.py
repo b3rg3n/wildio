@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from .models import Game, GameHistory
+from .models import Game, GameHistory, Promocode
+
 
 class GameSerializer(serializers.ModelSerializer):
     class Meta:
@@ -10,3 +11,8 @@ class GameHistorySerializer(serializers.ModelSerializer):
     class Meta:
         model = GameHistory
         fields = ['id', 'result', 'game', 'user']
+
+class PromocodeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Promocode
+        fields = ['id', 'name', 'cofficient']

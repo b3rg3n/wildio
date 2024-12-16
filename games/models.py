@@ -1,4 +1,7 @@
 from django.db import models
+from drf_yasg import openapi
+from drf_yasg.utils import swagger_auto_schema
+from rest_framework.decorators import api_view
 
 from userauth.models import User
 
@@ -10,6 +13,7 @@ class Game(models.Model):
     description = models.TextField()
     image = models.ImageField(upload_to="static/")
     status = models.BooleanField(default=False)
+
 
     def __str__(self):
         return self.name

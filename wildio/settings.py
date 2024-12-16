@@ -142,10 +142,30 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 SWAGGER_SETTINGS = {
     'DEFAULT_INFO': {
-        'title': 'Wildio API',
-        'description': 'Wildio API description',
-        'version': '1.0.0',
+            'title': 'Wildio API',
+            'description': 'Wildio API description',
+            'version': '1.0.0',
+        },
+    'SHOW_REQUEST_HEADERS': True,
+    'SECURITY_DEFINITIONS': {
+        'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header',
+        },
+        'basic': {
+            'type': 'basic'
+        }
     },
+    'USE_SESSION_AUTH': True,
+    'JSON_EDITOR': True,
+    'SUPPORTED_SUBMIT_METHODS': [
+        'get',
+        'post',
+        'put',
+        'delete',
+        'patch'
+    ],
 }
 
 REST_AUTH = {

@@ -1,15 +1,28 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from drf_yasg.utils import swagger_auto_schema
-
+from rest_framework.exceptions import NotFound
+from rest_framework.views import APIView
+from rest_framework.response import Response
 from .models import Game, GameHistory, Promocode
 from django.http import JsonResponse
 from rest_framework import generics
 from .serializers import GameSerializer, GameHistorySerializer, PromocodeSerializer
 
+class GameDetailView(APIView):
+    def get(self, request, id, format=None):
+        try:
+            game = Game.objects.get(id=id)
+        except Game.DoesNotExist:
+            raise NotFound(detail="Game not found")
+
+        serializer = GameSerializer(game)
+        return Response(serializer.data)
 
 class GameListCreate(generics.ListCreateAPIView):
     queryset = Game.objects.all()
     serializer_class = GameSerializer
+
+    #game_once = Game.objects.get(id=id)
 
     @swagger_auto_schema(
         operation_description="Получить список игр или создать новую игру",
